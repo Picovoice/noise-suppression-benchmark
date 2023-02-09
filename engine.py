@@ -20,6 +20,7 @@ class EngineResult:
 
 class Engines(Enum):
     MOZILLA_RNNOISE = 'mozilla_rnnoise'
+    ORIGINAL = 'original'
     PICOVOICE_KOALA = 'picovoice_koala'
 
 
@@ -37,6 +38,8 @@ class Engine(object):
     def create(engine: Engines, **kwargs: Any) -> 'Engine':
         if engine is Engines.MOZILLA_RNNOISE:
             return RNNoiseEngine(**kwargs)
+        elif engine is Engines.ORIGINAL:
+            return OriginalEngine()
         elif engine is Engines.PICOVOICE_KOALA:
             return KoalaEngine(**kwargs)
         else:
@@ -71,6 +74,15 @@ class KoalaEngine(Engine):
 
     def __str__(self) -> str:
         return Engines.PICOVOICE_KOALA.value
+
+
+class OriginalEngine(Engine):
+    def process(self, path: str) -> EngineResult:
+        pcm, _ = soundfile.read(path, dtype=np.int16)
+        return EngineResult(pcm, 0.0)
+
+    def __str__(self) -> str:
+        return Engines.ORIGINAL.value
 
 
 class RNNoiseEngine(Engine):
