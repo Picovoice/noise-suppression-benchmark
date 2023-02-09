@@ -107,7 +107,7 @@ def plot_results(
             engine_results.append(results_json.get(metric, np.nan))
 
         if bar_plot:
-            positions = np.arange(len(snrs_db)) + (engine_index - len(Engines) / 2) * bar_width
+            positions = np.arange(len(snrs_db)) + (engine_index - len(sorted_engines) / 2) * bar_width
             ax.bar(
                 positions,
                 engine_results,

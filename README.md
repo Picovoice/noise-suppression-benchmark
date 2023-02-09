@@ -18,7 +18,8 @@ monaural speech data across varying signal-to-noise ratios.
 The only currently implemented data set is the `synthetic, no reverb` part of the test set of the first installment of 
 the Microsoft deep noise suppression challenge at Interspeech 2020. It consists of 150 noisy files across various SNR 
 levels as well as their clean reference files. The data is available 
-[here](https://github.com/microsoft/DNS-Challenge/tree/interspeech2020/master/datasets/test_set/synthetic/no_reverb).
+[here](https://github.com/microsoft/DNS-Challenge/tree/interspeech2020/master/datasets/test_set/synthetic/no_reverb)
+within Microsoft's [DNS-Challenge repository](https://github.com/microsoft/DNS-Challenge).
 
 Either clone the whole repo and switch to the `interspeech2020/master` branch, or run the following commands in a new 
 directory to sparsely checkout the required files:
@@ -38,23 +39,19 @@ The `--data-folder` argument required for this benchmark needs to be set to
 
 ### Short-Term Objective Intelligibility (STOI)
 
-Word error rate (WER) is the ratio of edit distance between words in a reference transcript and the words in the output
-of the speech-to-text engine to the number of words in the reference transcript.
+The STOI metric is a simple intrusive metric that quantifies the similarity between the denoising output and the clean
+reference. The metric is a value between 0 and 1, where 1 means that the denoising result is exactly equal to the
+reference.
 
 ### Real Time Factor
 
 Real-time factor (RTF) is the ratio of CPU (processing) time to the length of the input speech file. A speech-to-text
-engine with lower RTF is more computationally efficient. We omit this metric for cloud-based engines.
+engine with lower RTF is more computationally efficient.
 
 ## Engines
 
-- [Amazon Transcribe](https://aws.amazon.com/transcribe/)
-- [Azure Speech-to-Text](https://azure.microsoft.com/en-us/services/cognitive-services/speech-to-text/)
-- [Google Speech-to-Text](https://cloud.google.com/speech-to-text)
-- [IBM Watson Speech-to-Text](https://www.ibm.com/ca-en/cloud/watson-speech-to-text)
-- [Mozilla DeepSpeech](https://github.com/mozilla/DeepSpeech)
-- [Picovoice Cheetah](https://picovoice.ai/)
-- [Picovoice Leopard](https://picovoice.ai/)
+- [Mozilla RNNoise](https://gitlab.xiph.org/xiph/rnnoise/)
+- [Picovoice Koala](https://picovoice.ai/)
 
 ## Usage
 
@@ -125,7 +122,7 @@ python3 benchmark.py \
 
 ### RTF
 
-Measurement is carried on an Ubuntu 20.04 machine with Intel CPU (`Intel(R) Core(TM) i5-6500 CPU @ 3.20GHz`), 64 GB of
+Measurement is carried on an Ubuntu 20.04 machine with Intel CPU (`Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz`), 64 GB of
 RAM, and NVMe storage.
 
 |     Engine      | RTF  |
