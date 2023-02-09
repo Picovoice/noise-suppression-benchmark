@@ -145,7 +145,7 @@ def plot_results(
     fig.tight_layout()
 
     if save_path is not None:
-        plt.savefig(save_path, transparent=True)
+        plt.savefig(save_path, facecolor=WHITE, transparent=True)
 
     if show:
         plt.show()
