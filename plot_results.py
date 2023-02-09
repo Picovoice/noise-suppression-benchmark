@@ -79,7 +79,7 @@ def plot_results(
     if font_family is not None:
         rcParams['font.family'] = font_family
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 4))
 
     sorted_engines = sorted(Engines, key=lambda e: (ENGINE_ORDER_KEYS.get(e, 1), ENGINE_PRINT_NAMES.get(e, e.value)))
     if not include_baseline:
@@ -138,11 +138,11 @@ def plot_results(
     ax.set_ylabel(METRIC_LABELS.get(metric, metric), fontsize=font_size)
     ax.yaxis.label.set_color(text_color)
 
-    ax.set_title(f'Results for {str(dataset)} dataset')
-
-    legend = plt.legend(framealpha=0, fontsize=font_size, ncol=2)
+    legend = plt.legend(framealpha=0, fontsize=font_size, ncol=2, bbox_to_anchor=(0.5, 1.0), loc='lower center')
     for x in legend.texts:
         x.set_color(text_color)
+
+    fig.tight_layout()
 
     if save_path is not None:
         plt.savefig(save_path, transparent=True)
@@ -159,6 +159,8 @@ def main() -> None:
     parser.add_argument('--limits', nargs=2, type=float)
     parser.add_argument('--line-plot', action='store_true')
     parser.add_argument('--include-baseline', action='store_true')
+    parser.add_argument('--font-family')
+    parser.add_argument('--fonts-folder')
     parser.add_argument('--hide', action='store_true')
     parser.add_argument('--save-path')
     args = parser.parse_args()
@@ -169,6 +171,8 @@ def main() -> None:
         metric=args.metric,
         bar_plot=not args.line_plot,
         limits=args.limits,
+        fonts_folder=args.fonts_folder,
+        font_family=args.font_family,
         include_baseline=args.include_baseline,
         show=not args.hide,
         save_path=args.save_path,
