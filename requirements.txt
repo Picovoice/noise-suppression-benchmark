@@ -1,0 +1,4 @@
+numpy
+pvkoala
+pystoi
+soundfile
