@@ -81,10 +81,9 @@ in each frame. The $\mathrm{power}$ is then defined as the maximum frame-wise su
 
 ### Mozilla RNNoise Instructions
 
-Clone and build the RNNoise `git` repository from 
-[https://gitlab.xiph.org/xiph/rnnoise](https://gitlab.xiph.org/xiph/rnnoise).
-
-Run the following command, replacing `${RNNOISE_FOLDER}` with the path to the root folder of the RNNoise repository.
+Clone the RNNoise repository from [https://gitlab.xiph.org/xiph/rnnoise](https://gitlab.xiph.org/xiph/rnnoise) 
+and follow the build instructions. Then run the following command, replacing `${RNNOISE_FOLDER}` with the path to the
+root folder of the RNNoise repository.
 
 ```console
 python3 benchmark.py \
@@ -94,7 +93,7 @@ python3 benchmark.py \
 --rnnoise-demo-path ${RNNOISE_FOLDER}/examples/rnnoise_demo
 ```
 
-Note that since RNNoise operates at 48kHz, the audio data is internally resampled.
+Note that since RNNoise operates at 48kHz, this benchmark internally resamples the audio.
 
 ### Picovoice Koala Instructions
 
