@@ -9,6 +9,7 @@ from typing import Any
 
 import numpy as np
 import soundfile
+import pvkoala
 
 
 @dataclass
@@ -44,7 +45,6 @@ class Engine(object):
 
 class KoalaEngine(Engine):
     def __init__(self, access_key: str) -> None:
-        import pvkoala
         self._koala = pvkoala.create(access_key)
 
     def process(self, path: str) -> EngineResult:

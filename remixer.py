@@ -34,7 +34,7 @@ class RemixedDataset(Dataset):
             pure_noise_path = os.path.join(pure_noise_folder, noisy_name)
 
             if os.path.exists(pure_noise_path):
-                pure_noise_pcm, pure_noise_sr = soundfile
+                pure_noise_pcm, pure_noise_sr = soundfile.read(pure_noise_path)
                 if pure_noise_sr != clean_sr or clean_pcm.size != pure_noise_pcm.size:
                     raise ValueError(
                         f"Cannot mix `{data.clean_path}` with `{pure_noise_path}`: samplerate or length mismatch")
@@ -52,10 +52,14 @@ class RemixedDataset(Dataset):
             mixed_pcm = clean_pcm + noise_scale * pure_noise_pcm
             soundfile.write(remix_path, data=mixed_pcm, samplerate=clean_sr)
 
-        return DataPair(data.clean_path, remix_path, f'{data.name}_remixed{self._snr_db:g}db')
+        return DataPair(data.clean_path, remix_path, self.remixed_name(data.name, self._snr_db))
 
     def __str__(self) -> str:
-        return f'{str(self._raw_dataset)}_remixed{self._snr_db:g}db'
+        return self.remixed_name(str(self._raw_dataset), self._snr_db)
+
+    @staticmethod
+    def remixed_name(basename: str, snr_db: float) -> str:
+        return f'{basename}_remixed_{snr_db:g}db'
 
     @classmethod
     def _energy(cls, pcm: np.ndarray) -> float:
