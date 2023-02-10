@@ -130,7 +130,7 @@ def plot_results(
         ax.set_ylim(*limits)
 
     xtick_pos = range(len(snrs_db)) if bar_plot else snrs_db
-    ax.set_xticks(xtick_pos, [f'{snr:+g} dB' for snr in snrs_db], fontsize=font_size)
+    ax.set_xticks(xtick_pos, [f'{snr:g} dB' for snr in snrs_db], fontsize=font_size)
     ax.tick_params(axis='both', colors=text_color)
 
     ax.set_xlabel('Signal-to-noise ratio', fontsize=font_size)
