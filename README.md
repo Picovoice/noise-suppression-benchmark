@@ -76,7 +76,7 @@ arguments to `python3 benchmark.py` and replace `${SNR_DB}` with your SNR in dB.
 The mixer separates the clean data from the noise, scales the noise, and mixes them together again. The scaling is done
 in such a way that
 
-$$ \frac{\mathrm{power}(\mathrm{clean})}{\mathrm{power}(\mathrm{noise})} = 10^{\mathrm{SNR_DB} / 10}. $$
+$$ \frac{\mathrm{power}(\mathrm{clean})}{\mathrm{power}(\mathrm{noise})} = 10^{\mathrm{SNR\_DB} / 10}. $$
 
 To compute the $\mathrm{power}$ of a signal, we divide it into frames of 512 samples and take the sum of squared samples
 in each frame. The $\mathrm{power}$ is then defined as the maximum frame-wise sum of squares in any frame.
