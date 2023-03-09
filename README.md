@@ -45,7 +45,7 @@ reference.
 
 ### Real Time Factor
 
-Real-time factor (RTF) is the ratio of CPU (processing) time to the length of the input speech file. A speech-to-text
+Real-time factor (RTF) is the ratio of CPU (processing) time to the length of the input speech file. A noise suppression
 engine with lower RTF is more computationally efficient.
 
 ## Engines
