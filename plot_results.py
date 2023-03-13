@@ -39,7 +39,7 @@ ENGINE_COLORS = {
 
 ENGINE_PRINT_NAMES = {
     Engines.MOZILLA_RNNOISE: "Mozilla RNNoise",
-    Engines.ORIGINAL: "Original (baseline)",
+    Engines.ORIGINAL: "Original (no enhancement)",
     Engines.PICOVOICE_KOALA: "Picovoice Koala",
 }
 

@@ -114,10 +114,11 @@ python3 benchmark.py \
 
 ### STOI on the original dataset
 
-|     Engine      | Interspeech2020 |
-|:---------------:|:---------------:|
-| Mozilla RNNoise |      0.925      |
-| Picovoice Koala |      0.959      |
+|          Engine           | Interspeech2020 |
+|:-------------------------:|:---------------:|
+| Original (no enhancement) |      0.915      |
+|      Mozilla RNNoise      |      0.925      |
+|      Picovoice Koala      |      0.959      |
 
 ### STOI on the remixed dataset at varying SNRs
 
