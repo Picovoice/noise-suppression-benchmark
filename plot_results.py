@@ -153,10 +153,10 @@ def plot_results(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', choices=[ds.value for ds in Datasets])
-    parser.add_argument('--snrs-db', nargs='+', default=[0, 10, 20, 30], type=float)
-    parser.add_argument('--metric', choices=METRIC_LABELS.keys(), default='stoi')
-    parser.add_argument('--limits', nargs=2, type=float)
+    parser.add_argument('--dataset', choices=[ds.value for ds in Datasets], required=True)
+    parser.add_argument('--metric', choices=METRIC_LABELS.keys(), default='stoi', required=True)
+    parser.add_argument('--snrs-db', nargs='+', default=[0, 10, 20, 30], metavar='SNR', type=float)
+    parser.add_argument('--limits', nargs=2, metavar=('LOWER', 'UPPER'), type=float)
     parser.add_argument('--line-plot', action='store_true')
     parser.add_argument('--include-baseline', action='store_true')
     parser.add_argument('--font-family')
