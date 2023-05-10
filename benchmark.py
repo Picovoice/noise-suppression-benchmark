@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import shutil
 from dataclasses import dataclass
 from time import perf_counter
 from typing import Any, Dict, Optional, Sequence
@@ -25,7 +26,7 @@ class Result:
     stoi: float
 
 
-def process_chunk(
+def process_data(
         engine_type: Engines,
         engine_params: Dict[str, Any],
         data: Sequence[DataPair],
@@ -45,8 +46,14 @@ def process_chunk(
         results.append(Result(data_name=data_pair.name, rtf=rtf, stoi=stoi))
 
         if output_folder is not None:
+            output_subfolder = os.path.join(output_folder, data_pair.name)
+            if not os.path.exists(output_subfolder):
+                os.makedirs(output_subfolder)
+                shutil.copy(data_pair.clean_path, os.path.join(output_subfolder, 'clean.wav'))
+                shutil.copy(data_pair.noisy_path, os.path.join(output_subfolder, 'noisy.wav'))
+
             soundfile.write(
-                os.path.join(output_folder, data_pair.name + '.wav'),
+                os.path.join(output_subfolder, f'{engine_type.value}.wav'),
                 engine_result.denoised_pcm,
                 sample_rate)
 
@@ -88,15 +95,18 @@ def main() -> None:
 
     output_folder = args.output_folder
     if output_folder is not None:
-        output_folder = os.path.join(output_folder, str(dataset), engine_type.value)
+        output_folder = os.path.join(output_folder, str(dataset))
         os.makedirs(output_folder, exist_ok=True)
 
-    results = process_chunk(engine_type, engine_params, data_pairs, output_folder)
+    print(f"Processing {len(data_pairs)} files...")
+    start_time = perf_counter()
+    results = process_data(engine_type, engine_params, data_pairs, output_folder)
+    print(f"Processed {len(data_pairs)} files in {perf_counter() - start_time:.2f} seconds")
 
     if output_folder is not None:
         results_dict = [vars(res) for res in results]
         results_dict = {res.pop('data_name'): res for res in results_dict}
-        with open(os.path.join(output_folder, 'results.json'), 'w') as f:
+        with open(os.path.join(output_folder, f'{engine_type.value}.json'), 'w') as f:
             json.dump(results_dict, f, indent=4)
         print(f"Individual results stored in {output_folder}")
 
