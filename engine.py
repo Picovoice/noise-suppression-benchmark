@@ -65,6 +65,8 @@ class KoalaEngine(Engine):
         enhanced_frames = [self._koala.process(frame) for frame in pcm_frames]
         runtime = perf_counter() - start_time
 
+        self._koala.reset()
+
         enhanced_pcm = np.concatenate(enhanced_frames, dtype=np.int16)
         enhanced_pcm = enhanced_pcm[delay_sample:delay_sample + length_sample]
         return EngineResult(enhanced_pcm, runtime)
