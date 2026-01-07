@@ -2,7 +2,7 @@
 
 Made in Vancouver, Canada by [Picovoice](https://picovoice.ai)
 
-This repo is a minimalist and extensible framework for benchmarking different noise suppression engines on 16kHz 
+This repo is a minimalist and extensible framework for benchmarking different noise suppression engines on 16kHz
 monaural speech data across varying signal-to-noise ratios.
 
 ## Table of Contents
@@ -15,13 +15,13 @@ monaural speech data across varying signal-to-noise ratios.
 
 ## Data
 
-The only currently implemented data set is the `synthetic, no reverb` part of the test set of the first installment of 
-the Microsoft deep noise suppression challenge at Interspeech 2020. It consists of 150 noisy files across various SNR 
-levels as well as their clean reference files. The data is available 
+The only currently implemented data set is the `synthetic, no reverb` part of the test set of the first installment of
+the Microsoft deep noise suppression challenge at Interspeech 2020. It consists of 150 noisy files across various SNR
+levels as well as their clean reference files. The data is available
 [here](https://github.com/microsoft/DNS-Challenge/tree/interspeech2020/master/datasets/test_set/synthetic/no_reverb)
 within Microsoft's [DNS-Challenge repository](https://github.com/microsoft/DNS-Challenge).
 
-Either clone the whole repo and switch to the `interspeech2020/master` branch, or run the following commands in a new 
+Either clone the whole repo and switch to the `interspeech2020/master` branch, or run the following commands in a new
 directory to sparsely checkout the required files:
 ```console
 git init
@@ -83,9 +83,8 @@ in each frame. The $\mathrm{power}$ is then defined as the maximum frame-wise su
 
 ### Mozilla RNNoise Instructions
 
-Clone the RNNoise repository from [https://gitlab.xiph.org/xiph/rnnoise](https://gitlab.xiph.org/xiph/rnnoise) 
-and follow the build instructions. Then run the following command, replacing `${RNNOISE_FOLDER}` with the path to the
-root folder of the RNNoise repository.
+Clone the RNNoise repository from [https://gitlab.xiph.org/xiph/rnnoise](https://gitlab.xiph.org/xiph/rnnoise/-/tree/v0.1?ref_type=tags)
+and follow the build instructions. Then run the following command, replacing `${RNNOISE_FOLDER}` with the path to the root folder of the RNNoise repository.
 
 ```console
 python3 benchmark.py \
@@ -126,10 +125,10 @@ python3 benchmark.py \
 
 ### RTF
 
-Measurement is carried on an Ubuntu 20.04 machine with Intel CPU (`Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz`), 64 GB of
+Measurement is carried on an `Ubuntu 22.04.3 LTS` machine with AMD CPU (`AMD Ryzen 7 5900X (24) @ 3.700GHz`), 64 GB of
 RAM, and NVMe storage.
 
 |     Engine      | RTF  |
 |:---------------:|:----:|
-| Mozilla RNNoise | 0.02 |
-| Picovoice Koala | 0.03 |
+| Mozilla RNNoise | 0.01 |
+| Picovoice Koala | 0.01 |
